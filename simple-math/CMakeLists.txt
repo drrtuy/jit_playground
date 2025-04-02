@@ -1,0 +1,15 @@
+cmake_minimum_required(VERSION 3.10)
+project(with_check)
+
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -std=c++20")
+
+FIND_PACKAGE(LLVM REQUIRED CONFIG PATHS "/usr/lib/llvm-16" "/usr/lib64/llvm14/" "/usr/lib/llvm-12")
+if (NOT LLVM_FOUND)
+    MESSAGE_ONCE(CS_NO_LLVM "Could not find a usable llvm development environment!")
+    return()
+endif()
+
+include_directories( ${LLVM_INCLUDE_DIRS} )
+add_executable(with_check math_with_out_of_range_check.cpp)
+target_link_libraries(with_check /usr/lib/llvm-16/lib/libLLVMSupport.a /usr/lib/llvm-16/lib/libLLVMCore.a /usr/lib/llvm-16/lib/libLLVMIRReader.a /usr/lib/llvm-16/lib/libLLVMMCJIT.a /usr/lib/llvm-16/lib/libLLVMOrcJIT.a /usr/lib/llvm-16/lib/libLLVMX86CodeGen.a /usr/lib/llvm-16/lib/libLLVMX86AsmParser.a /usr/lib/llvm-16/lib/libLLVMX86Desc.a /usr/lib/llvm-16/lib/libLLVMX86Disassembler.a /usr/lib/llvm-16/lib/libLLVMX86Info.a /usr/lib/llvm-16/lib/libLLVMExecutionEngine.a /usr/lib/llvm-16/lib/libLLVMRuntimeDyld.a /usr/lib/llvm-16/lib/libLLVMPasses.a /usr/lib/llvm-16/lib/libLLVMCoroutines.a /usr/lib/llvm-16/lib/libLLVMipo.a /usr/lib/llvm-16/lib/libLLVMFrontendOpenMP.a /usr/lib/llvm-16/lib/libLLVMLinker.a /usr/lib/llvm-16/lib/libLLVMIRPrinter.a /usr/lib/llvm-16/lib/libLLVMVectorize.a /usr/lib/llvm-16/lib/libLLVMJITLink.a /usr/lib/llvm-16/lib/libLLVMOrcTargetProcess.a /usr/lib/llvm-16/lib/libLLVMOrcShared.a /usr/lib/llvm-16/lib/libLLVMWindowsDriver.a /usr/lib/llvm-16/lib/libLLVMOption.a /usr/lib/llvm-16/lib/libLLVMAsmPrinter.a /usr/lib/llvm-16/lib/libLLVMInstrumentation.a /usr/lib/llvm-16/lib/libLLVMGlobalISel.a /usr/lib/llvm-16/lib/libLLVMSelectionDAG.a /usr/lib/llvm-16/lib/libLLVMCodeGen.a /usr/lib/llvm-16/lib/libLLVMTarget.a /usr/lib/llvm-16/lib/libLLVMBitWriter.a /usr/lib/llvm-16/lib/libLLVMObjCARCOpts.a /usr/lib/llvm-16/lib/libLLVMScalarOpts.a /usr/lib/llvm-16/lib/libLLVMAggressiveInstCombine.a /usr/lib/llvm-16/lib/libLLVMInstCombine.a /usr/lib/llvm-16/lib/libLLVMTransformUtils.a /usr/lib/llvm-16/lib/libLLVMAnalysis.a /usr/lib/llvm-16/lib/libLLVMProfileData.a /usr/lib/llvm-16/lib/libLLVMSymbolize.a /usr/lib/llvm-16/lib/libLLVMDebugInfoDWARF.a /usr/lib/llvm-16/lib/libLLVMDebugInfoPDB.a /usr/lib/llvm-16/lib/libLLVMObject.a /usr/lib/llvm-16/lib/libLLVMIRReader.a /usr/lib/llvm-16/lib/libLLVMAsmParser.a /usr/lib/llvm-16/lib/libLLVMBitReader.a /usr/lib/llvm-16/lib/libLLVMTextAPI.a /usr/lib/llvm-16/lib/libLLVMDebugInfoMSF.a /usr/lib/llvm-16/lib/libLLVMCFGuard.a /usr/lib/llvm-16/lib/libLLVMCore.a /usr/lib/llvm-16/lib/libLLVMRemarks.a /usr/lib/llvm-16/lib/libLLVMBitstreamReader.a /usr/lib/llvm-16/lib/libLLVMMCParser.a /usr/lib/llvm-16/lib/libLLVMMCDisassembler.a /usr/lib/llvm-16/lib/libLLVMMC.a /usr/lib/llvm-16/lib/libLLVMBinaryFormat.a /usr/lib/llvm-16/lib/libLLVMTargetParser.a /usr/lib/llvm-16/lib/libLLVMDebugInfoCodeView.a /usr/lib/llvm-16/lib/libLLVMSupport.a -lrt -ldl -lpthread -lm /usr/lib/x86_64-linux-gnu/libz.so /usr/lib/x86_64-linux-gnu/libzstd.so /usr/lib/x86_64-linux-gnu/libtinfo.so /usr/lib/llvm-16/lib/libLLVMDemangle.a)
